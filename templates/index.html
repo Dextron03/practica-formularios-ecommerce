@@ -1,0 +1,30 @@
+{% extends "./layouts/base.html" %}
+
+{% block title %}Home{% endblock title %}
+{% comment %} TODO: Agregar mas secciones a la pagina{% endcomment %}
+{% block contenido %}
+<div class="container mt-4">
+    <h1 class="mb-4">Bienvenido a Tu Página</h1>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for prod in producto %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% if prod.imagen %}{{ prod.imagen.url }}{% else %}ruta_a_la_imagen_por_defecto{% endif %}" class="card-img-top" alt="Imagen del Producto" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ prod.nombre }}</h5>
+                        <p class="card-text">{{ prod.descripcion }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Categoría: {{ prod.categoria }}</li>
+                        <li class="list-group-item">Precio: ${{ prod.precio }}</li>
+                    </ul>
+                    <div class="card-footer text-muted">
+                        Disponible: {% if prod.disponible == True %} <i class="bi bi-check-circle-fill text-success"></i> {% elif prod.disponible == False %} <i class="bi bi-dash-circle-fill text-danger"></i> {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock contenido %}
