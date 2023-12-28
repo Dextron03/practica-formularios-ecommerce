@@ -1,7 +1,7 @@
 from django.db import models
 from django.core import validators
 
-# Create your models here.
+# TODO: Cambiar la ruta de las imagenes.
 class Productos(models.Model):
     nombre = models.CharField(max_length=100, null=False, blank=True)
     descripcion = models.TextField(max_length=1500, null=False, blank=True)
