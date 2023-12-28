@@ -1,0 +1,14 @@
+{% extends "./layouts/base.html" %}
+
+{% block title %}Add Product{% endblock title %}
+
+{% block contenido %}
+    <div class="container mt-4">
+        <h1>Formulario de Productos</h1>
+        <form action="{% url 'productos' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+            <input class="btn btn-primary" type="submit" value="Enviar">
+        </form>
+    </div>
+{% endblock contenido %}
