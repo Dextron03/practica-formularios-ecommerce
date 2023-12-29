@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from django.utils.html import format_html
 class ProductoFrom(forms.ModelForm):
     class Meta:
         model = models.Productos
@@ -16,3 +17,13 @@ class ProductoFrom(forms.ModelForm):
                    }
     
     # TODO: Validar todo los campos del formulario.
+    def clean_stock(self):
+        stock = self.cleaned_data.get("stock")
+        
+        if stock is not None and int(stock) < 0:
+            raise forms.ValidationError(
+                format_html('<div class="alert alert-danger" role="alert">A simple danger alert—check it out!</div>')
+            )
+
+        return stock
+    
