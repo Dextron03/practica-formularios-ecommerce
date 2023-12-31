@@ -8,22 +8,27 @@
     
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for prod in producto %}
-            <div class="col">
-                <div class="card h-100">
-                    <img src="{% if prod.imagen %}{{ prod.imagen.url }}{% else %}ruta_a_la_imagen_por_defecto{% endif %}" class="card-img-top" alt="Imagen del Producto" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ prod.nombre }}</h5>
-                        <p class="card-text">{{ prod.descripcion }}</p>
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm position-relative">
+                <img src="{% if prod.imagen %}{{ prod.imagen.url }}{% else %}ruta_a_la_imagen_por_defecto{% endif %}" class="card-img-top" alt="Imagen del Producto" style="height: 200px; object-fit: cover;">
+                {% if not prod.disponible or prod.stock == 0 %}
+                    <div class="centered-icon">
+                        <i class="bi bi-bag-dash-fill text-danger fs-1"></i>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Categoría: {{ prod.categoria }}</li>
-                        <li class="list-group-item">Precio: ${{ prod.precio }}</li>
-                    </ul>
-                    <div class="card-footer text-muted">
-                        Disponible: {% if prod.disponible == True %} <i class="bi bi-check-circle-fill text-success"></i> {% elif prod.disponible == False %} <i class="bi bi-dash-circle-fill text-danger"></i> {% endif %}
-                    </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ prod.nombre }}</h5>
+                    <p class="card-text">{{ prod.descripcion }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item border-0">Categoría: {{ prod.categoria }}</li>
+                    <li class="list-group-item border-0">Precio: ${{ prod.precio }}</li>
+                </ul>
+                <div class="card-footer text-muted border-0">
+                    {% if prod.disponible == True %} <i class="bi bi-check-circle-fill text-success"> disponible</i> {% elif prod.disponible == False or prod.disponible <= 0 %} <i class="bi bi-dash-circle-fill text-danger"> agotado</i> {% endif %}
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>

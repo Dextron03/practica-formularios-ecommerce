@@ -1,0 +1,20 @@
+.centered-icon {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.errorlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.errorlist-item {
+    margin-bottom: 5px;  /* Ajusta según sea necesario */
+}
+
+
+
