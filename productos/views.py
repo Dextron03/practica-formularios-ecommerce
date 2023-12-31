@@ -13,7 +13,7 @@ def producto(request):
         form_producto = form.ProductoFrom(request.POST, request.FILES)
         if form_producto.is_valid():
             form_producto.save()
-            return redirect('producto')
+            return redirect('home')
         else:
             return render(request, "form_producto.html", {"form":form_producto})
         
